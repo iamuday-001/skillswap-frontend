@@ -5,7 +5,7 @@ import axios from "axios";
 import "../pages/Explore.css";
 import { useNavigate } from "react-router-dom";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://skillswap-backend-hj73.onrender.com/api";
 
 const Explore = () => {
   const [ideas, setIdeas] = useState([]);
