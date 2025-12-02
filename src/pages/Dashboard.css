@@ -1,0 +1,260 @@
+/* 🌌 Starry animated background */
+.stars-bg {
+  background: radial-gradient(ellipse at bottom, #0d1b2a, #000);
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden; /* ❌ this is blocking scroll */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+/* Stars layer */
+.stars,
+.stars:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background: transparent;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.stars {
+  box-shadow: 50px 80px white, 150px 200px white, 300px 120px white,
+    500px 400px white, 700px 100px white, 900px 250px white, 1200px 300px white,
+    1400px 150px white, 1600px 500px white, 1800px 350px white,
+    2000px 180px white;
+  animation: twinkle 2s infinite alternate;
+}
+
+.stars:after {
+  transform: translate(-50px, -50px);
+  box-shadow: inherit;
+}
+
+.stars::before {
+  content: "";
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 15px 6px rgba(255, 255, 255, 0.8);
+  animation: glowStar 3s infinite alternate ease-in-out;
+}
+
+@keyframes glowStar {
+  from {
+    opacity: 0.5;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.3;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ========== Dashboard layout ========== */
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  margin-top: 200px;
+}
+
+.box {
+  background: rgba(30, 30, 30, 0.6);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 30px;
+  width: 450px;
+  height: 350px;
+  text-align: center;
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.box:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.box-image {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  filter: drop-shadow(0px 0px 8px rgba(91, 215, 255, 0.6));
+}
+
+.box-title {
+  font-size: 22px;
+  color: #5bd7ff;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.box-description {
+  color: #ddd;
+  font-size: 15px;
+  padding: 0 10px;
+}
+
+/* ========== Popup Form ========== */
+.popup-form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.95);
+  background: rgba(20, 20, 20, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 30px 25px;
+  border-radius: 18px;
+  z-index: 999;
+  color: #fff;
+  width: 450px;
+  max-width: 95%;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+  animation: popupShow 0.4s ease forwards;
+}
+
+@keyframes popupShow {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.popup-form h3 {
+  margin-bottom: 20px;
+  color: #5bd7ff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Form fields */
+.popup-form form label {
+  margin-top: 10px;
+  font-weight: 500;
+  display: block;
+  color: #ccc;
+}
+
+.popup-form form input,
+.popup-form form select,
+.popup-form form textarea {
+  margin-top: 6px;
+  margin-bottom: 14px;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(40, 40, 40, 0.9);
+  color: #fff;
+  font-size: 14px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.popup-form form input:focus,
+.popup-form form select:focus,
+.popup-form form textarea:focus {
+  outline: none;
+  background-color: rgba(60, 60, 60, 0.9);
+  box-shadow: 0 0 8px #5bd7ff;
+}
+
+.popup-form form textarea {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* 🔘 Form Buttons Row */
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.form-buttons button {
+  flex: 1;
+  margin: 0 6px;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 15px;
+  transition: all 0.3s ease;
+}
+
+/* Button styles */
+.btn-cancel {
+  background: #ff4b5c;
+  color: #fff;
+}
+.btn-cancel:hover {
+  background: #e63946;
+}
+
+.btn-next {
+  background: #0077ff;
+  color: #fff;
+}
+.btn-next:hover {
+  background: #005fcc;
+}
+
+.btn-back {
+  background: #6c757d;
+  color: #fff;
+}
+.btn-back:hover {
+  background: #565e64;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, #5bd7ff, #3ac4e0);
+  color: #000;
+}
+.btn-submit:hover {
+  background: linear-gradient(135deg, #3ac4e0, #5bd7ff);
+  transform: scale(1.03);
+}

@@ -1,0 +1,90 @@
+/* MyPosts.css */
+
+/* Container */
+.myposts-container {
+  padding: 30px;
+  background: #121212;
+  color: #fff;
+  min-height: 100vh;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Title */
+.myposts-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  color: #00d9ff;
+  border-left: 4px solid #00d9ff;
+  padding-left: 10px;
+  letter-spacing: 1px;
+}
+
+/* Skill list grid */
+.myposts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+/* Each post card */
+.mypost-card {
+  background: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.mypost-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 217, 255, 0.3);
+}
+
+/* Headings */
+.mypost-card h3 {
+  color: #00d9ff;
+  margin-bottom: 12px;
+  font-size: 1.3rem;
+}
+
+/* Text */
+.mypost-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 6px 0;
+}
+
+.mypost-card strong {
+  color: #ff9800;
+}
+
+/* Delete button */
+.delete-btn {
+  background: #ff4444;
+  border: none;
+  padding: 8px 15px;
+  margin-top: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  color: white;
+  font-weight: 600;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.delete-btn:hover {
+  background: #e60000;
+  transform: scale(1.05);
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

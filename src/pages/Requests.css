@@ -1,0 +1,136 @@
+.requests-page {
+  max-width: 1100px;
+  margin: 50px auto;
+  padding: 20px;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+  color: #fff;
+}
+
+.requests-page h2 {
+  font-size: 2.2rem;
+  margin-bottom: 25px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #4df8ff, #aa44ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.requests-page h3 {
+  margin-top: 40px;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #ffd700;
+  text-align: left;
+}
+
+.section-box {
+  background: rgba(18, 24, 38, 0.85);
+  padding: 25px;
+  border-radius: 12px;
+  margin-top: 15px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.55);
+  transition: 0.3s ease;
+}
+
+.section-box:hover {
+  transform: translateY(-4px);
+}
+
+.no-requests {
+  padding: 25px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 10px;
+  color: #bbb;
+  font-size: 1rem;
+  margin-top: 12px;
+  font-style: italic;
+  letter-spacing: 0.5px;
+}
+
+.request-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(27, 38, 59, 0.95);
+  border-radius: 12px;
+  padding: 18px;
+  margin: 14px 0;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s ease;
+}
+
+.request-card:hover {
+  transform: scale(1.02);
+}
+
+.request-left h3 {
+  margin: 0 0 8px 0;
+  color: #ffd700;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.small {
+  margin: 3px 0;
+  color: #cfd3e1;
+  font-size: 0.9rem;
+}
+
+.request-actions button {
+  margin: 0 5px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.accept {
+  background: #28a745;
+  color: #fff;
+}
+.accept:hover {
+  background: #218838;
+}
+
+.reject {
+  background: #dc3545;
+  color: #fff;
+}
+.reject:hover {
+  background: #c82333;
+}
+
+.status-badge {
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.status-badge.accepted {
+  background-color: #d4f4dd;
+  color: #2e7d32;
+}
+
+.status-badge.rejected {
+  background-color: #ffdede;
+  color: #c62828;
+}
+
+.status-badge.pending {
+  background-color: #fff6c7;
+  color: #d48800;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

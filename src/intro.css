@@ -1,0 +1,137 @@
+/* Intro Main Layout */
+.intro-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  background: #1e1e2f; /* Simple dark background */
+  color: #ffffff;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Left Text Section */
+.intro-left,
+.intro-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+}
+
+.intro-left {
+  align-items: flex-start;
+}
+
+/* Title with Highlighted First Letters + Animated Underline */
+.intro-title {
+  position: relative;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 2rem;
+}
+
+.intro-title-first {
+  font-size: 3.8rem; /* bigger than the rest */
+  color: #00ffe7; /* highlight color for C, I, P */
+}
+
+/* Underline animation */
+.intro-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  height: 4px;
+  width: 0%;
+  background-color: #00ffe7;
+  animation: underlineSlide 2s ease-in-out infinite;
+  border-radius: 2px;
+}
+
+@keyframes underlineSlide {
+  0% {
+    width: 0%;
+    opacity: 0.5;
+  }
+  50% {
+    width: 80%;
+    opacity: 1;
+  }
+  100% {
+    width: 0%;
+    opacity: 0;
+  }
+}
+
+/* Sub-heading */
+.intro-heading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #ccccff;
+}
+
+/* Paragraph */
+.intro-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #e0e0e0;
+  max-width: 500px;
+}
+
+/* Buttons */
+.intro-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.intro-btn {
+  padding: 0.8rem 1.6rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.intro-btn.login {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.intro-btn.register {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.intro-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+
+/* Right Side Image */
+.intro-right {
+  align-items: center;
+}
+
+.intro-image {
+  max-width: 80%;
+  height: auto;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}

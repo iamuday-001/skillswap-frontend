@@ -1,0 +1,284 @@
+/* Navbar Container */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent; /* transparent for background effects */
+  color: #fff;
+  padding: 12px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* keep navbar below modal */
+}
+
+/* Left Side (Logo) */
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+.navbar-logo {
+  height: 100px; /* bigger size */
+  width: 100px;
+  opacity: 0.95;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.navbar-logo:hover {
+  transform: scale(1.1) rotate(5deg);
+  opacity: 1;
+}
+
+/* Center (Title) */
+.navbar-center {
+  flex: 1;
+  text-align: center;
+}
+.navbar-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #00ffcc, #0099ff, #ff00cc);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 1px;
+  display: inline-block;
+  position: relative;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Animated underline for title */
+.navbar-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #00ffcc, #0099ff, #ff00cc);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s ease;
+  border-radius: 2px;
+}
+.navbar-title:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Fade-in animation for title */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Right Side (User) */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+}
+
+/* Wrapper for avatar + user info */
+.user-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+/* User text info */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+}
+.user-name {
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+}
+
+.user-email {
+  font-size: 12px;
+  color: #ddd;
+  line-height: 1.2;
+  margin: 0;
+  padding: 0;
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Avatar */
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #00ffcc;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.user-avatar:hover {
+  transform: scale(1.05);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  background: rgba(20, 20, 20, 0.95);
+  border-radius: 6px;
+  min-width: 160px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  z-index: 500; /* ensure above navbar */
+}
+.dropdown-menu button {
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  color: #eee;
+  text-align: left;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.dropdown-menu button:hover {
+  background: rgba(0, 255, 204, 0.15);
+  color: #00ffcc;
+}
+
+/* === Edit Profile Modal === */
+
+/* Dark overlay behind modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000; /* always above navbar + dropdown */
+}
+
+/* Modal box */
+.edit-profile-modal {
+  background: #1e1e1e;
+  padding: 24px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* Heading */
+.edit-profile-form h3 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* Input fields */
+.edit-profile-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: none;
+  background: #2b2b2b;
+  color: #fff;
+  font-size: 14px;
+}
+
+/* Buttons */
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.save-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.save-btn:hover {
+  background: #0062cc;
+}
+
+.cancel-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.cancel-btn:hover {
+  background: #5a6268;
+}
+/* 🔔 Notification Bell */
+.notification-bell {
+  position: relative;
+  font-size: 22px;
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  background: red;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
+}
+/* Workspace link styled */
+.navbar-link {
+  margin-right: 20px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar-link:hover {
+  color: #00c9ff;
+  transform: translateY(-2px);
+}
+
+.navbar-link.active {
+  color: #00c9ff;
+  border-bottom: 2px solid #00c9ff;
+  padding-bottom: 2px;
+}
