@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import instance from "./api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import "./form.css";
 
@@ -20,11 +20,9 @@ function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "https://skillswap-backend-hj73.onrender.com/api/auth/register",
-        formData,
-        { withCredentials: true }
-      );
+      const res = await instance.post("/auth/register", formData, {
+        withCredentials: true,
+      });
 
       setSuccessMessage("🎉 Registered successfully! Redirecting...");
       setTimeout(() => {
