@@ -1,4 +1,3 @@
-// src/pages/Navbar.js
 import React, { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
@@ -18,7 +17,9 @@ const Navbar = () => {
     avatar: "",
   });
 
-  // Generate color for avatar background
+  // 🌍 Backend URL
+  const BASE_URL = "https://skillswap-backend-hj73.onrender.com/api";
+
   function stringToColor(str) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
@@ -54,23 +55,23 @@ const Navbar = () => {
   useEffect(() => {
     const fetchUserAndRequests = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/me", {
+        const res = await axios.get(`${BASE_URL}/auth/me`, {
           withCredentials: true,
         });
 
         const currentUser = {
           name: res.data.username || "Guest",
           email: res.data.email || "No email",
-          avatar: res.data.profilePic || "", // using profile picture if exists
+          avatar: res.data.profilePic || "",
         };
         setUser(currentUser);
 
         if (res.data.email) {
           const ownerRes = await axios.get(
-            `http://localhost:5000/api/requests/owner?email=${res.data.email}`
+            `${BASE_URL}/requests/owner?email=${res.data.email}`
           );
           const requesterRes = await axios.get(
-            `http://localhost:5000/api/requests/requester?email=${res.data.email}`
+            `${BASE_URL}/requests/requester?email=${res.data.email}`
           );
 
           const ownerNotifs = ownerRes.data.filter(
@@ -83,7 +84,7 @@ const Navbar = () => {
           setRequestsCount(ownerNotifs.length + requesterNotifs.length);
 
           const teamRes = await axios.get(
-            `http://localhost:5000/api/teams/user/${res.data.email}`
+            `${BASE_URL}/teams/user/${res.data.email}`
           );
           setTeams(teamRes.data);
         }
@@ -97,7 +98,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:5000/api/auth/logout",
+        `${BASE_URL}/auth/logout`,
         {},
         { withCredentials: true }
       );
@@ -127,19 +128,15 @@ const Navbar = () => {
   return (
     <>
       <div className="navbar">
-        {/* Logo */}
         <div className="navbar-left" onClick={() => navigate("/")}>
           <img src={logo} alt="Logo" className="navbar-logo" />
         </div>
 
-        {/* App title */}
         <div className="navbar-center">
           <h1 className="navbar-title">Collaborative Innovation Platform</h1>
         </div>
 
-        {/* Right side section */}
         <div className="navbar-right">
-          {/* 🔔 Notifications */}
           <div
             className="notification-bell"
             onClick={() => navigate("/requests")}
@@ -150,7 +147,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Workspaces */}
           {teams.length > 0 &&
             teams.map((t) => (
               <Link key={t._id} to={`/workspace/${t._id}`} className="nav-btn">
@@ -158,7 +154,6 @@ const Navbar = () => {
               </Link>
             ))}
 
-          {/* Avatar + user info */}
           <div
             className="user-info"
             onClick={() => setShowDropdown((prev) => !prev)}
@@ -172,7 +167,6 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Dropdown */}
           {showDropdown && (
             <div className="dropdown-menu">
               <button onClick={() => navigate("/myposts")}>📌 My Posts</button>
@@ -182,7 +176,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Profile Modal */}
       {showEditProfile && (
         <div className="modal-overlay">
           <div className="edit-profile-modal">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import instance from "./api/axiosInstance";
+import instance from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
 import "./form.css";
 

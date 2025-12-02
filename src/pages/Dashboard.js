@@ -8,9 +8,8 @@ import axios from "axios";
 
 const Dashboard = () => {
   const [showIdeaForm, setShowIdeaForm] = useState(false);
-  const [step, setStep] = useState(1); // step 1 or 2
+  const [step, setStep] = useState(1);
 
-  // Idea fields
   const [ideaName, setIdeaName] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -23,11 +22,14 @@ const Dashboard = () => {
 
   const navigate = useNavigate();
 
+  // 🌍 **Backend URL**
+  const BASE_URL = "https://skillswap-backend-hj73.onrender.com/api";
+
   // ✅ Fetch logged-in user
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/me", {
+        const res = await axios.get(`${BASE_URL}/auth/me`, {
           withCredentials: true,
         });
         setUserEmail(res.data.email);
@@ -43,12 +45,12 @@ const Dashboard = () => {
     navigate("/explore");
   };
 
-  // ✅ Submit idea
+  // 🚀 Submit idea
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post(
-        "http://localhost:5000/api/ideas",
+        `${BASE_URL}/ideas`,
         {
           ideaName,
           description,
@@ -63,7 +65,6 @@ const Dashboard = () => {
         { withCredentials: true }
       );
 
-      // reset
       setShowIdeaForm(false);
       setStep(1);
       setIdeaName("");
@@ -139,7 +140,6 @@ const Dashboard = () => {
                   <option value="Other">Other</option>
                 </select>
 
-                {/* Buttons */}
                 <div className="form-buttons">
                   <button
                     type="button"
@@ -197,7 +197,6 @@ const Dashboard = () => {
                   <option value="Expert">Expert</option>
                 </select>
 
-                {/* Buttons */}
                 <div className="form-buttons">
                   <button
                     type="button"
