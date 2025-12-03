@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import "../pages/Requests.css";
 
+const BASE_URL = "https://skillswap-backend-hj73.onrender.com/api";
+
 const Requests = () => {
   const [userEmail, setUserEmail] = useState("");
   const [ownerRequests, setOwnerRequests] = useState([]);
@@ -13,21 +15,21 @@ const Requests = () => {
   useEffect(() => {
     const loadRequests = async () => {
       try {
-        const userRes = await axios.get("http://localhost:5000/api/auth/me", {
+        const userRes = await axios.get(`${BASE_URL}/auth/me`, {
           withCredentials: true,
         });
         const email = userRes.data.email;
         setUserEmail(email);
 
-        const ownerRes = await axios.get(
-          "http://localhost:5000/api/requests/owner",
-          { params: { email }, withCredentials: true }
-        );
+        const ownerRes = await axios.get(`${BASE_URL}/requests/owner`, {
+          params: { email },
+          withCredentials: true,
+        });
 
-        const myRes = await axios.get(
-          "http://localhost:5000/api/requests/requester",
-          { params: { email }, withCredentials: true }
-        );
+        const myRes = await axios.get(`${BASE_URL}/requests/requester`, {
+          params: { email },
+          withCredentials: true,
+        });
 
         setOwnerRequests(ownerRes.data || []);
         setMyRequests(myRes.data || []);
@@ -51,7 +53,7 @@ const Requests = () => {
 
     try {
       await axios.put(
-        `http://localhost:5000/api/requests/${reqId}`,
+        `${BASE_URL}/requests/${reqId}`,
         { status: action },
         { withCredentials: true }
       );
@@ -67,7 +69,7 @@ const Requests = () => {
     }
   };
 
-  // ✅ Helper to display nice status labels
+  // Helper to display nice status labels
   const formatStatus = (status) => {
     if (status === "kicked") return "Removed from team";
     return status.charAt(0).toUpperCase() + status.slice(1);
