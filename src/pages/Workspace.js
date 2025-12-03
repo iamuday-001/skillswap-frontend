@@ -6,8 +6,8 @@ import Navbar from "./Navbar";
 import "./Workspace.css";
 import { io } from "socket.io-client";
 
-const API_BASE = "https://your-backend-url.onrender.com/api"; // 🔥 Updated
-const SOCKET_URL = "https://your-backend-url.onrender.com"; // 🔥 Updated
+const API_BASE = "https://skillswap-backend-hj73.onrender.com/api";
+const SOCKET_URL = "https://skillswap-backend-hj73.onrender.com";
 
 export default function Workspace() {
   const [teams, setTeams] = useState([]);
