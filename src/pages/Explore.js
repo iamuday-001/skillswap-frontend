@@ -11,23 +11,21 @@ const Explore = () => {
   const [ideas, setIdeas] = useState([]);
   const [userEmail, setUserEmail] = useState("");
   const [loadingIdeas, setLoadingIdeas] = useState(true);
-  const [sendingId, setSendingId] = useState(null); // id of idea being requested
-  const [requestedIdeaIds, setRequestedIdeaIds] = useState([]); // track already-requested ideas
+  const [sendingId, setSendingId] = useState(null);
+  const [requestedIdeaIds, setRequestedIdeaIds] = useState([]);
   const navigate = useNavigate();
 
-  // Get logged-in user + their existing requests (to avoid duplicates)
   useEffect(() => {
     const init = async () => {
       try {
-        const me = await axios.get(`${API_BASE}/api/auth/me`, {
+        const me = await axios.get(`${API_BASE}/auth/me`, {
           withCredentials: true,
         });
         const email = me.data?.email || "";
         setUserEmail(email);
 
         if (email) {
-          // Fetch requests the user has already sent (so we can mark buttons)
-          const myReq = await axios.get(`${API_BASE}/api/requests/requester`, {
+          const myReq = await axios.get(`${API_BASE}/requests/requester`, {
             params: { email },
             withCredentials: true,
           });
@@ -41,18 +39,16 @@ const Explore = () => {
           "Error fetching user or my requests:",
           err.response?.data || err.message
         );
-        // Not forcing navigation to login here — user might be browsing publicly
       }
     };
     init();
   }, []);
 
-  // Fetch all ideas
   useEffect(() => {
     const fetchIdeas = async () => {
       setLoadingIdeas(true);
       try {
-        const res = await axios.get(`${API_BASE}/api/ideas`);
+        const res = await axios.get(`${API_BASE}/ideas`);
         setIdeas(res.data || []);
       } catch (err) {
         console.error(
@@ -66,9 +62,7 @@ const Explore = () => {
     fetchIdeas();
   }, []);
 
-  // Request to join
   const handleRequestJoin = async (idea) => {
-    // basic guards
     if (!userEmail) {
       alert("Please log in to request to join a project.");
       navigate("/login");
@@ -99,32 +93,20 @@ const Explore = () => {
         ownerEmail: idea.email,
       };
 
-      const res = await axios.post(`${API_BASE}/api/requests`, payload, {
+      await axios.post(`${API_BASE}/requests`, payload, {
         withCredentials: true,
       });
 
-      // success (201)
       setRequestedIdeaIds((prev) => [...prev, idea._id]);
       alert("✅ Request sent successfully!");
     } catch (err) {
-      // show a clear message
       const serverMsg =
         err.response?.data?.message ||
         err.response?.data?.error ||
         err.response?.data ||
         err.message;
       console.error("Request join error:", err.response || err);
-      if (err.response?.status === 400) {
-        alert("⚠️ " + serverMsg);
-      } else if (err.response?.status === 401) {
-        alert("Please login (session expired).");
-        navigate("/login");
-      } else {
-        alert(
-          "Failed to send request — " +
-            (serverMsg || "check console/server logs")
-        );
-      }
+      alert(serverMsg);
     } finally {
       setSendingId(null);
     }
@@ -146,6 +128,7 @@ const Explore = () => {
               {ideas.map((idea) => {
                 const alreadyRequested = requestedIdeaIds.includes(idea._id);
                 const isOwner = userEmail && idea.email === userEmail;
+
                 return (
                   <div className="idea-card" key={idea._id}>
                     <div className="idea-header">
